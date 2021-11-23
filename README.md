@@ -9,6 +9,15 @@
 6. [Uwagi](#uwagi)  
 7. [Zakończenie rozwoju](#zakończenie-rozwoju)  
 
+<br />
+<br />
+
+## Wznowienie rozwoju
+
+Postanowiłem wznowić rozwuj tego oprogramowania. W pierwszej kolejności:
+- przeniesienie do Qt6 (Dziala ale jest jeszcze dużo błędów)
+- zmiana sposób przetrzymywania danych, teraz będzie to w bazie danych nie plikach XML
+- wsparcie dla JPK7
 
 <br/>
 <br/>
