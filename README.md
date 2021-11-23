@@ -37,6 +37,7 @@ Aplikacja do obsługi faktur, która pozwala na zapis, edycję i drukowanie fakt
 <br/>
 <br/>
 
+# Na razie brak możliwości instalowania!!!
 
 ## Wymagania
 
@@ -259,4 +260,4 @@ lub (w Arch Linux), jeśli instalacja nastąpiła z PKGBUILD:
 
 ## Zakończenie rozwoju
 
-Niniejszym ogłaszam zakończenie prac nad aplikacją z kilku powodów. Program rozrósł się tak bardzo, że nie jestem w stanie go prowadzić w pojedynkę. Częstotliwość pojawiania się zmian w przepisach także nie jest korzystny w tej sytuacji. Mam zamiar jednak pozostawić repozytorium, aby chętni mogli korzystać z kodu źródłowego i go rozwijać, pod warunkiem przestrzegania zasad, które obejmuje licencja GPL-3.0, a więc między innymi nieusuwanie informacji o autorach. 
+Wznowiłem rozwój tego oprogramowania.

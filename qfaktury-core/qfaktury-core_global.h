@@ -1,0 +1,12 @@
+#ifndef QFAKTURYCORE_GLOBAL_H
+#define QFAKTURYCORE_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(QFAKTURYCORE_LIBRARY)
+#  define QFAKTURYCORE_EXPORT Q_DECL_EXPORT
+#else
+#  define QFAKTURYCORE_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // QFAKTURYCORE_GLOBAL_H
