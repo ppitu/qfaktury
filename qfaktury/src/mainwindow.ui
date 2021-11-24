@@ -97,7 +97,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="invoiceTab">
        <attribute name="title">
@@ -578,92 +578,7 @@
        </attribute>
        <layout class="QGridLayout">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableT">
-          <property name="contextMenuPolicy">
-           <enum>Qt::CustomContextMenu</enum>
-          </property>
-          <property name="editTriggers">
-           <set>QAbstractItemView::NoEditTriggers</set>
-          </property>
-          <property name="selectionMode">
-           <enum>QAbstractItemView::SingleSelection</enum>
-          </property>
-          <property name="selectionBehavior">
-           <enum>QAbstractItemView::SelectItems</enum>
-          </property>
-          <property name="numRows" stdset="0">
-           <number>0</number>
-          </property>
-          <property name="numCols" stdset="0">
-           <number>12</number>
-          </property>
-          <property name="readOnly" stdset="0">
-           <bool>true</bool>
-          </property>
-          <property name="sorting" stdset="0">
-           <bool>true</bool>
-          </property>
-          <column>
-           <property name="text">
-            <string>Index</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Nazwa</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Skrót</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Kod</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>PKWiU</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Typ</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Jedn.</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Netto1</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Netto2</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Netto3</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Netto4</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Stawka VAT</string>
-           </property>
-          </column>
-         </widget>
+         <widget class="QTableView" name="tableT"/>
         </item>
        </layout>
       </widget>
@@ -1459,7 +1374,6 @@
   <tabstop>filtrStart</tabstop>
   <tabstop>filtrEnd</tabstop>
   <tabstop>tableK</tabstop>
-  <tabstop>tableT</tabstop>
  </tabstops>
  <resources>
   <include location="../qfaktury.qrc"/>

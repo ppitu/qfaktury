@@ -29,7 +29,7 @@ set(PROJECT_SOURCES
     src/csvexport.cpp src/csvexport.h src/csvexport.ui src/custompaymdata.cpp src/custompaymdata.h
     src/custompayment.cpp src/custompayment.h src/custompaymentdialog.ui src/datewidgetitem.h
     src/deliverynote.cpp src/deliverynote.h src/detector.h src/documentdata.h src/duplicate.cpp src/duplicate.h
-    src/goods.cpp src/goods.h src/goods.ui src/goodsgrosslist.cpp src/goodsgrosslist.h src/goodsissuednotes.cpp
+    src/goodsgrosslist.cpp src/goodsgrosslist.h src/goodsissuednotes.cpp
     src/goodsissuednotes.h src/goodslist.cpp src/goodslist.h src/goodslist.ui src/idatalayer.h src/invoice.cpp
     src/invoice.h src/invoice.ui src/invoicegross.cpp src/invoicegross.h src/invoicerr.cpp src/invoicerr.h src/messagehandler.h
     src/organizer.cpp src/organizer.h src/organizer.ui src/owncalendar.cpp src/owncalendar.h src/productdata.h
@@ -40,6 +40,7 @@ set(PROJECT_SOURCES
     src/SimpleSmtp_SSL_QT5/smtp_attachements/emailwindow.cpp src/SimpleSmtp_SSL_QT5/smtp_attachements/emailwindow.h
     src/SimpleSmtp_SSL_QT5/smtp_attachements/emailwindow.ui src/SimpleSmtp_SSL_QT5/smtp_attachements/smtp.cpp
     src/SimpleSmtp_SSL_QT5/smtp_attachements/smtp.h
+    src/Dialog/ProductDialog.cpp src/Dialog/ProductDialog.h src/Dialog/ProductDialog.ui
   )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -66,6 +67,9 @@ else()
     endif()
 endif()
 
+include_directories("../qfaktury-core")
+
+target_link_libraries(qfaktury PRIVATE qfaktury-core)
 target_link_libraries(qfaktury PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(qfaktury PRIVATE Qt6::Xml)
 target_link_libraries(qfaktury PRIVATE Qt6::Core5Compat)

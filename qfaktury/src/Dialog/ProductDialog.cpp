@@ -1,30 +1,64 @@
 
-#include "goods.h"
-#include "idatalayer.h"
-#include "settings.h"
-#include "validations.h"
+#include "ProductDialog.h"
+#include "ui_ProductDialog.h"
 
-#include <QDesktopServices>
-#include <QUrl>
+#include "src/idatalayer.h"
+#include "src/settings.h"
+#include "src/validations.h"
 
 /** Constructor
  */
 
-Product::Product(QWidget *parent, int mode, IDataLayer *dl) : QDialog(parent) {
+ProductDialog::ProductDialog(Product& product, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::ProductDialog),
+    mProduct(product)
+{
+    ui->setupUi(this);
 
-  qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
+    connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &ProductDialog::accept);
+    connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &ProductDialog::reject);
 
-  workMode = mode;
-  dataLayer = dl;
+    ui->elIdent->setText(mProduct.ident());
+    ui->elName->setText(mProduct.name());
+    ui->elCode->setText(mProduct.code());
+    ui->elDescription->setText(mProduct.description());
+    ui->elMetric->setText(mProduct.metric());
+    ui->elQuality->setText(mProduct.quality());
+    ui->elPKWIU->setText(mProduct.pkwiu());
+    ui->dsNet->setValue(mProduct.net());
+    ui->dsGross->setValue(mProduct.gross());
+}
 
-  setupUi(this);
-  init();
+ProductDialog::~ProductDialog()
+{
+    delete ui;
+}
+
+void ProductDialog::accept()
+{
+    mProduct.setIdent(ui->elIdent->text());
+    mProduct.setName(ui->elName->text());
+    mProduct.setCode(ui->elCode->text());
+    mProduct.setDescription(ui->elDescription->text());
+    mProduct.setPkwiu(ui->elPKWIU->text());
+    mProduct.setNet(ui->dsNet->value());
+    mProduct.setGross(ui->dsGross->value());
+    mProduct.setMetric(ui->elMetric->text());
+    mProduct.setQuality(ui->elQuality->text());
+
+    QDialog::accept();
+}
+
+void ProductDialog::reject()
+{
+    QDialog::reject();
 }
 
 /** Inits
  */
 
-void Product::init() {
+/*void ProductDialog::init() {
 
   qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
 
@@ -38,7 +72,7 @@ void Product::init() {
 
   /** Slot
    *  Nett value changed
-   */
+
 
   connect(
       netEdit,
@@ -48,7 +82,7 @@ void Product::init() {
 
   /** Slot
    *  spinBox with list of prices changed
-   */
+
 
   connect(spinBox2,
           static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
@@ -56,14 +90,14 @@ void Product::init() {
 
   /** Slot
    *  Finds PKWIU code on the net
-   */
+
   connect(pkwiuBtn, &QToolButton::clicked, [this]() {
     QDesktopServices::openUrl(QUrl(tr(
         "http://www.vat.pl/pkwiu/index.php?rodzajKlasyfikacji=pkwiuvat&kod")));
   });
 }
 
-const QString Product::getRetGoods() {
+const QString ProductDialog::getRetGoods() {
   qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
   return ret;
 }
@@ -72,9 +106,9 @@ const QString Product::getRetGoods() {
 
 /** Slot
  *  saves data to XML file and returns row for products table
- */
 
-void Product::okClick() {
+
+void ProductDialog::okClick() {
 
   qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
 
@@ -118,7 +152,7 @@ void Product::okClick() {
 }
 
 // helper method which sets "-" in input forms
-QString Product::isEmpty(QString in) {
+QString ProductDialog::isEmpty(QString in) {
 
   qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
 
@@ -130,9 +164,9 @@ QString Product::isEmpty(QString in) {
 /******************** SLOTS END ***************************/
 
 /** Loads data into the form
- */
 
-void Product::selectData(QString idx, int type) {
+
+void ProductDialog::selectData(QString idx, int type) {
 
   qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
 
@@ -164,9 +198,9 @@ void Product::selectData(QString idx, int type) {
 }
 
 /** Saves data from the form
- */
 
-bool Product::insertData() {
+
+bool ProductDialog::insertData() {
 
   qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
 
@@ -178,9 +212,9 @@ bool Product::insertData() {
 
 /** Modifies product
  *  Searches for the right one and saves it.
- */
 
-bool Product::updateData() {
+
+bool ProductDialog::updateData() {
 
   qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
 
@@ -192,9 +226,9 @@ bool Product::updateData() {
 }
 
 /** Loads from the form to Data object
- */
 
-void Product::getData(ProductData prodData) {
+
+void ProductDialog::getData(ProductData prodData) {
 
   qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
 
@@ -218,9 +252,9 @@ void Product::getData(ProductData prodData) {
 }
 
 /** Display productData
- */
 
-void Product::setData(ProductData &prodData) {
+
+void ProductDialog::setData(ProductData &prodData) {
 
   qDebug() << __FILE__ << __LINE__ << __FUNCTION__;
 
@@ -235,3 +269,4 @@ void Product::setData(ProductData &prodData) {
     prodData.prices[i] = sett().stringToDouble(net[i]);
   prodData.vat = cbVat->currentText().toInt();
 }
+*/

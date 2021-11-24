@@ -21,6 +21,7 @@ class QTimer;
 class QAction;
 class Invoice;
 
+class ProductModel;
 
 // class for creating main window with menu, toolbar, calendar and table widget
 class MainWindow : public QMainWindow {
@@ -109,6 +110,8 @@ private:
   QList<int> allSymbolsWarehouse;
   ownCalendarWidget *calendar; // Organizer
   static MainWindow *m_instance;
+
+  ProductModel* mProductModel;
 
   void saveColumnWidth();
   void init();

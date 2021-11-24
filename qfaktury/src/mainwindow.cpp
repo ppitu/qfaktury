@@ -6,7 +6,7 @@
 #include "datewidgetitem.h"
 #include "deliverynote.h"
 #include "duplicate.h"
-#include "goods.h"
+//#include "goods.h"
 #include "goodsissuednotes.h"
 #include "invoice.h"
 #include "invoicegross.h"
@@ -42,7 +42,9 @@
 #include <QStandardPaths>
 #include <iostream>
 
-
+#include "Class/Product.h"
+#include "Model/ProductModel.h"
+#include "Dialog/ProductDialog.h"
 
 MainWindow *MainWindow::m_instance = nullptr;
 bool MainWindow::shouldHidden = false;
@@ -51,7 +53,7 @@ bool MainWindow::shouldHidden = false;
  */
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow) {
+    : QMainWindow(parent), ui(new Ui::MainWindow), mProductModel(nullptr) {
 
   qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
 
@@ -197,7 +199,7 @@ void MainWindow::init() {
    // ui->sendEmailAction->setDisabled(true);
   }
 
-  if (ui->tableT->rowCount() != 0) {
+  /*if (ui->tableT->rowCount() != 0) {
 
     ui->editGoodsAction->setEnabled(true);
     ui->delGoodsAction->setEnabled(true);
@@ -206,26 +208,26 @@ void MainWindow::init() {
 
     ui->editGoodsAction->setDisabled(true);
     ui->delGoodsAction->setDisabled(true);
-  }
+  }*/
 
   // choose data access mode
   dl = new XmlDataLayer();
 
   // towary/uslugi - wymiary
-  ui->tableT->setColumnWidth(0, sett().value("towCol0", QVariant(50)).toInt());
-  ui->tableT->setColumnWidth(1, sett().value("towCol1", QVariant(140)).toInt());
-  ui->tableT->setColumnWidth(3, sett().value("towCol2", QVariant(50)).toInt());
-  ui->tableT->setColumnWidth(4, sett().value("towCol3", QVariant(70)).toInt());
-  ui->tableT->setColumnWidth(5, sett().value("towCol4", QVariant(70)).toInt());
-  ui->tableT->setColumnWidth(
-      6, sett().value("towCol5", QVariant(65)).toInt()); // net1
-  ui->tableT->setColumnWidth(
-      7, sett().value("towCol6", QVariant(65)).toInt()); // net2
-  ui->tableT->setColumnWidth(
-      8, sett().value("towCol7", QVariant(65)).toInt()); // net3
-  ui->tableT->setColumnWidth(9, sett().value("towCol8", QVariant(65)).toInt());
-  ; // net4
-  ui->tableT->setColumnWidth(10, sett().value("towCol9", QVariant(65)).toInt());
+  //ui->tableT->setColumnWidth(0, sett().value("towCol0", QVariant(50)).toInt());
+  //ui->tableT->setColumnWidth(1, sett().value("towCol1", QVariant(140)).toInt());
+  //ui->tableT->setColumnWidth(3, sett().value("towCol2", QVariant(50)).toInt());
+  //ui->tableT->setColumnWidth(4, sett().value("towCol3", QVariant(70)).toInt());
+  //ui->tableT->setColumnWidth(5, sett().value("towCol4", QVariant(70)).toInt());
+  //ui->tableT->setColumnWidth(
+  //    6, sett().value("towCol5", QVariant(65)).toInt()); // net1
+  //ui->tableT->setColumnWidth(
+  //    7, sett().value("towCol6", QVariant(65)).toInt()); // net2
+  //ui->tableT->setColumnWidth(
+  //    8, sett().value("towCol7", QVariant(65)).toInt()); // net3
+  //ui->tableT->setColumnWidth(9, sett().value("towCol8", QVariant(65)).toInt());
+  //; // net4
+  //ui->tableT->setColumnWidth(10, sett().value("towCol9", QVariant(65)).toInt());
 
   ui->tableH->setColumnWidth(0, sett().value("histCol0", QVariant(0)).toInt());
   ui->tableH->setColumnWidth(1,
@@ -369,8 +371,8 @@ void MainWindow::init() {
           SLOT(showTableMenuM(QPoint)));
   connect(ui->tableM, SIGNAL(cellDoubleClicked(int, int)), this,
           SLOT(warehouseEdit()));
-  connect(ui->tableT, SIGNAL(cellDoubleClicked(int, int)), this,
-          SLOT(goodsEdit()));
+  //connect(ui->tableT, SIGNAL(cellDoubleClicked(int, int)), this,
+  //        SLOT(goodsEdit()));
   connect(ui->tableT, SIGNAL(customContextMenuRequested(QPoint)), this,
           SLOT(showTableMenuT(QPoint)));
   connect(ui->sendEmailAction, SIGNAL(triggered()), this,
@@ -380,8 +382,8 @@ void MainWindow::init() {
           SLOT(mainUpdateStatus(QTableWidgetItem *)));
   connect(ui->tableK, SIGNAL(itemClicked(QTableWidgetItem *)), this,
           SLOT(mainUpdateStatus(QTableWidgetItem *)));
-  connect(ui->tableT, SIGNAL(itemClicked(QTableWidgetItem *)), this,
-          SLOT(mainUpdateStatus(QTableWidgetItem *)));
+  //connect(ui->tableT, SIGNAL(itemClicked(QTableWidgetItem *)), this,
+  //        SLOT(mainUpdateStatus(QTableWidgetItem *)));
   connect(ui->tableM, SIGNAL(itemClicked(QTableWidgetItem *)), this,
           SLOT(mainUpdateStatus(QTableWidgetItem *)));
   connect(ui->tableK, SIGNAL(cellClicked(int, int)), this,
@@ -391,7 +393,7 @@ void MainWindow::init() {
   readBuyer();
   readHist();
   readWarehouses();
-  readGoods();
+  //readGoods();
   categorizeYears();
 
 
@@ -412,6 +414,9 @@ void MainWindow::init() {
     if (files.isEmpty())
       generatePdfFromList();
   }
+
+  mProductModel = new ProductModel(this);
+  ui->tableT->setModel(mProductModel);
 }
 
 #if QUAZIP_FOUND
@@ -837,7 +842,7 @@ void MainWindow::readGoods() {
 
   qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
 
-  tableClear(ui->tableT);
+  /*tableClear(ui->tableT);
   QVector<ProductData> prodVec = dl->productsSelectAllData();
 
   for (int i = 0; i < prodVec.size(); ++i) {
@@ -869,7 +874,7 @@ void MainWindow::readGoods() {
     ui->tableT->item(ui->tableT->rowCount() - 1, 11)->setText(text);
   }
 
-  ui->tableT->setSortingEnabled(true);
+  ui->tableT->setSortingEnabled(true);*/
 }
 
 /** Creates directories if required
@@ -1099,7 +1104,7 @@ void MainWindow::tabChanged() {
   }
 
   // goods
-  if (ui->tableT->rowCount() != 0) {
+  /*if (ui->tableT->rowCount() != 0) {
 
     ui->editGoodsAction->setEnabled(true);
     ui->delGoodsAction->setEnabled(true);
@@ -1108,7 +1113,7 @@ void MainWindow::tabChanged() {
 
     ui->editGoodsAction->setDisabled(true);
     ui->delGoodsAction->setDisabled(true);
-  }
+  }*/
 }
 
 /** Slot used to read the invoices, calls readHist.
@@ -2187,9 +2192,23 @@ void MainWindow::newDuplicate() {
 /** Slot used to add goods
  */
 
-void MainWindow::goodsAdd() {
+void MainWindow::goodsAdd()
+{
+    Product product;
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+    auto* dialog = new ProductDialog(product);
+
+    auto dialogCode = dialog->exec();
+
+    if(dialogCode == QDialog::Accepted)
+    {
+        QModelIndex createdIndex = mProductModel->addProduct(product);
+        ui->tableT->setCurrentIndex(createdIndex);
+    }
+
+    delete dialog;
+
+  /*qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
 
   Product *goodsWindow = new Product(this, 0, dl);
 
@@ -2214,21 +2233,21 @@ void MainWindow::goodsAdd() {
   }
 
   goodsWindow = 0;
-  delete goodsWindow;
+  delete goodsWindow;*/
 }
 
 /** Slot used to delete goods
  */
 void MainWindow::goodsDel() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  /*qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
 
   if (ui->tableT->selectedItems().count() <= 0) {
 
     QMessageBox::information(
         this, QString("QFaktury"),
         QString("Towar nie został wybrany. Nie można usuwać."));
-    /* ToDo: -cRework: Sprawdzić */
+    /* ToDo: -cRework: Sprawdzić
                 //QString("Ok"), 0, 0, 1);
     return;
   }
@@ -2239,12 +2258,12 @@ void MainWindow::goodsDel() {
                            QString("Czy napewno chcesz usunąć towar ") +
                                ui->tableT->item(row, 0)->text() + "/" +
                                ui->tableT->item(row, 1)->text() + "?") == 0) {
-      /* ToDo: -cRework: Sprawdzić */
+      /* ToDo: -cRework: Sprawdzić
       //QString("Tak"), QString("Nie"), 0, 0, 1) == 0) {
 
     dl->productsDeleteData(ui->tableT->item(row, 0)->text());
     ui->tableT->removeRow(row);
-  }
+  }*/
 }
 
 /** Slot used for editing goods
@@ -2252,14 +2271,14 @@ void MainWindow::goodsDel() {
 
 void MainWindow::goodsEdit() {
 
-  qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
+  /*qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
 
   if (ui->tableT->selectedItems().count() <= 0) {
 
     QMessageBox::information(
         this, QString("QFaktury"),
         QString("Towar nie został wybrany. Nie można edytować."));
-    /* ToDo: -cRework: Sprawdzić */
+    /* ToDo: -cRework: Sprawdzić
                 //QString("Ok"), 0, 0, 1);
     return;
   }
@@ -2291,7 +2310,7 @@ void MainWindow::goodsEdit() {
   }
 
   goodsWindow = 0;
-  delete goodsWindow;
+  delete goodsWindow;*/
 }
 
 

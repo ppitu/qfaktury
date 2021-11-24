@@ -29,7 +29,7 @@ int ProductModel::rowCount(const QModelIndex &parent) const
 
 int ProductModel::columnCount(const QModelIndex &parent) const
 {
-    return 12;
+    return 11;
 }
 
 QVariant ProductModel::data(const QModelIndex &index, int role) const
@@ -47,17 +47,16 @@ QVariant ProductModel::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole:
         switch (index.column()) {
         case ColumnName::ID: return product.id();
+        case ColumnName::IDENT: return product.ident();
         case ColumnName::NAME: return product.name();
         case ColumnName::CODE: return product.code();
         case ColumnName::PKWIU: return product.pkwiu();
-        case ColumnName::CURRENCY: return product.currency();
+        case ColumnName::QUALITY: return product.quality();
         case ColumnName::DESCRIPTION: return product.description();
-        case ColumnName::TYPE: return product.type();
-        case ColumnName::QUANTITY: return product.quantity();
-        case ColumnName::DISCOUNT: return product.discount();
-        case ColumnName::PRICE: return product.price();
         case ColumnName::NET: return product.net();
         case ColumnName::GROSS: return product.gross();
+        case ColumnName::VAT: return product.vat();
+        case ColumnName::METRIC: return product.metric();
         }
     default:
         return {};
@@ -75,17 +74,16 @@ bool ProductModel::setData(const QModelIndex &index, const QVariant &value, int 
     auto productTemp = qvariant_cast<Product>(value);
 
     Product& product = *mProducts->at(index.row());
+    product.setIdent(productTemp.ident());
     product.setName(productTemp.name());
     product.setCode(productTemp.code());
     product.setPkwiu(productTemp.pkwiu());
-    product.setCurrency(productTemp.currency());
+    product.setQuality(productTemp.quality());
     product.setDescription(productTemp.description());
-    product.setType(productTemp.type());
-    product.setQuantity(productTemp.quantity());
-    product.setDiscount(productTemp.discount());
-    product.setPrice(productTemp.price());
     product.setNet(productTemp.net());
     product.setGross(productTemp.gross());
+    product.setVat(productTemp.vat());
+    product.setMetric(productTemp.metric());
     mDb.mProductDao.updateProduct(product);
     emit dataChanged(index, index);
 

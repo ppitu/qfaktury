@@ -18,32 +18,30 @@ public:
 
     enum Roles {
         ID_ROLE = Qt::UserRole + 1,
+        IDENT_ROLE,
         NAME_ROLE,
         CODE_ROLE,
         PKWIU_ROLE,
-        CURRENCY_ROLE,
+        QUALITY_ROLE,
         DESCRIPTION_ROLE,
-        TYPE_ROLE,
-        QUANTITY_ROLE,
-        DISCOUNT_ROLE,
-        PRICE_ROLE,
         NET_ROLE,
-        GROSS_ROLE
+        GROSS_ROLE,
+        VAT_ROLE,
+        METRIC_ROLE
     };
 
     enum ColumnName {
         ID = 0,
+        IDENT,
         NAME,
         CODE,
         PKWIU,
-        CURRENCY,
+        QUALITY,
         DESCRIPTION,
-        TYPE,
-        QUANTITY,
-        DISCOUNT,
-        PRICE,
         NET,
-        GROSS
+        GROSS,
+        VAT,
+        METRIC
     };
 
     explicit ProductModel(QObject *parent = nullptr);
