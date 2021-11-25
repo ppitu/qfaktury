@@ -19,6 +19,7 @@ add_library(qfaktury-core SHARED
   Class/Product.h Class/Product.cpp
   DatabaseClass/ProductDao.h DatabaseClass/ProductDao.cpp
   Model/ProductModel.h Model/ProductModel.cpp
+  TypeClass/Price.h TypeClass/Price.cpp
 )
 
 target_link_libraries(qfaktury-core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
