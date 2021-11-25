@@ -1,17 +1,15 @@
 #include "Product.h"
 
 Product::Product() :
-    mVat(0),
     mLastId(0),
     mName(""),
     mCode(""),
     mPkwiu(""),
     mDescription(""),
-    mNet(0),
-    mGross(0),
     mIdent(""),
     mQuality(""),
-    mMetric("")
+    mMetric(""),
+    mPrice(0, 0)
 {
 
 }
@@ -24,16 +22,6 @@ int Product::id() const
 void Product::setId(int newId)
 {
     mId = newId;
-}
-
-int Product::vat() const
-{
-    return mVat;
-}
-
-void Product::setVat(int newVat)
-{
-    mVat = newVat;
 }
 
 int Product::lastId() const
@@ -86,26 +74,6 @@ void Product::setDescription(const QString &newDescription)
     mDescription = newDescription;
 }
 
-double Product::net() const
-{
-    return mNet;
-}
-
-void Product::setNet(double newNet)
-{
-    mNet = newNet;
-}
-
-double Product::gross() const
-{
-    return mGross;
-}
-
-void Product::setGross(double newGross)
-{
-    mGross = newGross;
-}
-
 const QString &Product::ident() const
 {
     return mIdent;
@@ -136,8 +104,18 @@ void Product::setMetric(const QString &newMetric)
     mMetric = newMetric;
 }
 
-Product::Product(int id, int vat, int lastId, const QString &ident, const QString &name, const QString &code, const QString &pkwiu, const QString &description, const QString &quality, const QString &metric, double net, double gross) : mId(id),
-    mVat(vat),
+const Price &Product::price() const
+{
+    return mPrice;
+}
+
+void Product::setPrice(const Price &newPrice)
+{
+    mPrice = newPrice;
+}
+
+Product::Product(int id, int lastId, const QString &ident, const QString &name, const QString &code, const QString &pkwiu, const QString &description, const QString &quality, const QString &metric, const Price& price) :
+    mId(id),
     mLastId(lastId),
     mIdent(ident),
     mName(name),
@@ -146,6 +124,5 @@ Product::Product(int id, int vat, int lastId, const QString &ident, const QStrin
     mDescription(description),
     mQuality(quality),
     mMetric(metric),
-    mNet(net),
-    mGross(gross)
+    mPrice(price)
 {}

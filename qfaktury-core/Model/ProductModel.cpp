@@ -53,9 +53,9 @@ QVariant ProductModel::data(const QModelIndex &index, int role) const
         case ColumnName::PKWIU: return product.pkwiu();
         case ColumnName::QUALITY: return product.quality();
         case ColumnName::DESCRIPTION: return product.description();
-        case ColumnName::NET: return product.net();
-        case ColumnName::GROSS: return product.gross();
-        case ColumnName::VAT: return product.vat();
+        case ColumnName::NET: return product.price().getNet();
+        case ColumnName::GROSS: return product.price().getGross();
+        case ColumnName::VAT: return product.price().getVat();
         case ColumnName::METRIC: return product.metric();
         }
     default:
@@ -80,9 +80,7 @@ bool ProductModel::setData(const QModelIndex &index, const QVariant &value, int 
     product.setPkwiu(productTemp.pkwiu());
     product.setQuality(productTemp.quality());
     product.setDescription(productTemp.description());
-    product.setNet(productTemp.net());
-    product.setGross(productTemp.gross());
-    product.setVat(productTemp.vat());
+    product.setPrice(productTemp.price());
     product.setMetric(productTemp.metric());
     mDb.mProductDao.updateProduct(product);
     emit dataChanged(index, index);

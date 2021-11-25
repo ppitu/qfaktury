@@ -1,39 +1,71 @@
 #include "Price.h"
 
 
-Price::Price(double net, double vat) :
-    mNet(net),
-    mVat(vat)
+Price::Price(double net, int vat) :
+    net_(net),
+    vat_(vat),
+    gross_(0.00)
 {
-    mGross = mNet + (mNet * mVat);
+    calculate();
+}
+
+Price::Price() :
+    net_(0.00),
+    vat_(23),
+    gross_(0.00)
+{
+
 }
 
 double Price::getNet() const
 {
-    return mNet;
+    return net_;
 }
 
 void Price::setNet(double newNet)
 {
-    mNet = newNet;
+    net_ = newNet;
 }
 
-double Price::getGorss() const
+double Price::getGross() const
 {
-    return mGross;
+    return gross_;
 }
 
-void Price::setGorss(double newGorss)
+void Price::setGross(double newGorss)
 {
-    mGross = newGorss;
+    gross_ = newGorss;
 }
 
-double Price::getVat() const
+int Price::getVat() const
 {
-    return mVat;
+    return vat_;
 }
 
-void Price::setVat(double newVat)
+void Price::setVat(int newVat)
 {
-    mVat = newVat;
+    vat_ = newVat;
+}
+
+void Price::changeNet(double net)
+{
+    net_ = net;
+    calculate();
+}
+
+void Price::changeGross(double gross)
+{
+    gross_= gross;
+    calculate();
+}
+
+void Price::chbageVat(int vat)
+{
+    vat_ = vat;
+    calculate();
+}
+
+void Price::calculate()
+{
+    gross_ = net_ + (net_ * (vat_/100.00));
 }

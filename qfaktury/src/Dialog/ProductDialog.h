@@ -18,29 +18,17 @@ class ProductDialog : public QDialog
 public:
     explicit ProductDialog(Product& product, QWidget *parent = nullptr);
     ~ProductDialog();
-    //void selectData(QString idx, int type); // called from MainWindow
-    //const QString getRetGoods();
 
 private slots:
     void accept();
     void reject();
 
-    //void okClick();
+    void calculateGross();
 
 private:
     Ui::ProductDialog *ui;
     Product& mProduct;
-    /*IDataLayer *dataLayer;
-  QString ret;
-  QStringList net;
-  int workMode; // Working mode - 0 = new; 1 = edit
-
-  void init();
-  void getData(ProductData prodData);
-  void setData(ProductData &prodData);
-  bool updateData();
-  bool insertData();
-  QString isEmpty(QString in);*/
+    Price price;
 };
 
 #endif //PRODUCTDIALOG_H

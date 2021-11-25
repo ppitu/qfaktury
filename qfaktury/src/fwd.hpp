@@ -1,0 +1,40 @@
+#pragma once
+
+class BuyerData;
+class DocumentData;
+class IDataLayer;
+class Invoice;
+class InvoiceData;
+class MessageHandler;
+class ProductData;
+class WarehouseData;
+class ownCalendarWidget;
+struct CustomPaymData;
+
+class EmailWindow;
+
+class QButtonGroup;
+class QDate;
+class QDateTimeEdit;
+class QDomElement;
+class QDomNode;
+class QFile;
+class QFormLayout;
+class QGroupBox;
+class QLabel;
+class QLineEdit;
+class QNetworkAccessManager;
+class QNetworkReply;
+class QPlainTextEdit;
+class QPrinter;
+class QPushButton;
+class QSpinBox;
+class QString;
+// QStringList;
+class QTabWidget;
+class QTableWidget;
+class QTextCodec;
+class QTextEdit;
+class QTranslator;
+class QXmlSchema;
+class QXmlStreamWriter;

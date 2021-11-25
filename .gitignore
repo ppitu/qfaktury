@@ -130,5 +130,6 @@ CMakeLists.txt.user*
 *.cxxflags
 *.cflags
 
+GusApi/
 
 # End of https://www.toptal.com/developers/gitignore/api/qt,qtcreator,c++,cmake

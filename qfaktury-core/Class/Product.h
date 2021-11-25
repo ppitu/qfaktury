@@ -6,16 +6,16 @@
 #include <QMetaType>
 #include <QString>
 
+#include "TypeClass/Price.h"
+
 class Product
 {
 public:
     Product();
-    Product(int id, int vat, int lastId, const QString &ident, const QString &name, const QString &code, const QString &pkwiu, const QString &description, const QString &quality, const QString &metric, double net, double gross);
+    Product(int id, int lastId, const QString &ident, const QString &name, const QString &code, const QString &pkwiu, const QString &description, const QString &quality, const QString &metric, const Price& price);
 
     int id() const;
     void setId(int newId);
-    int vat() const;
-    void setVat(int newVat);
     int lastId() const;
     void setLastId(int newLastId);
     const QString &name() const;
@@ -26,21 +26,17 @@ public:
     void setPkwiu(const QString &newPkwiu);
     const QString &description() const;
     void setDescription(const QString &newDescription);
-    double net() const;
-    void setNet(double newNet);
-    double gross() const;
-    void setGross(double newGross);
     const QString &ident() const;
     void setIdent(const QString &newIdent);
     const QString &quality() const;
     void setQuality(const QString &newQuality);
-
     const QString &metric() const;
     void setMetric(const QString &newMetric);
+    const Price &price() const;
+    void setPrice(const Price &newPrice);
 
 private:
     int mId;
-    int mVat;
     int mLastId;
     QString mIdent;
     QString mName;
@@ -49,8 +45,7 @@ private:
     QString mDescription;
     QString mQuality;
     QString mMetric;
-    double mNet;
-    double mGross;
+    Price mPrice;
 };
 
 Q_DECLARE_METATYPE(Product);

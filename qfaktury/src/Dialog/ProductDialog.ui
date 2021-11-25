@@ -91,6 +91,9 @@
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
            <property name="buttonSymbols">
             <enum>QAbstractSpinBox::NoButtons</enum>
            </property>
@@ -112,7 +115,23 @@
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="cbVat"/>
+            <widget class="QComboBox" name="cbVat">
+             <item>
+              <property name="text">
+               <string>23</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>8</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>5</string>
+              </property>
+             </item>
+            </widget>
            </item>
           </layout>
          </item>

@@ -35,9 +35,9 @@ void ProductDao::addProduct(Product &product) const
     query.bindValue(":pkwiu", product.pkwiu());
     query.bindValue(":quality", product.quality());
     query.bindValue(":description", product.description());
-    query.bindValue(":net", product.net());
-    query.bindValue(":gross", product.gross());
-    query.bindValue(":vat", product.vat());
+    query.bindValue(":net", product.price().getNet());
+    query.bindValue(":gross", product.price().getGross());
+    query.bindValue(":vat", product.price().getVat());
     query.bindValue(":metric", product.metric());
     query.exec();
     product.setId(query.lastInsertId().toInt());
@@ -56,9 +56,9 @@ void ProductDao::updateProduct(const Product &product) const
     query.bindValue(":pkwiu", product.pkwiu());
     query.bindValue(":quality", product.quality());
     query.bindValue(":description", product.description());
-    query.bindValue(":net", product.net());
-    query.bindValue(":gross", product.gross());
-    query.bindValue(":vat", product.vat());
+    query.bindValue(":net", product.price().getNet());
+    query.bindValue(":gross", product.price().getGross());
+    query.bindValue(":vat", product.price().getVat());
     query.bindValue(":metric", product.metric());
     query.exec();
     DatabaseManager::debugQuery(query);
@@ -91,9 +91,8 @@ std::unique_ptr<std::vector<std::unique_ptr<Product> > > ProductDao::products() 
         product->setPkwiu(query.value("pkwiu").toString());
         product->setQuality(query.value("quality").toString());
         product->setDescription(query.value("description").toString());
-        product->setNet(query.value("net").toDouble());
-        product->setGross(query.value("gross").toDouble());
-        product->setVat(query.value("vat").toInt());
+        Price price(query.value("net").toDouble(), query.value("vat").toInt());
+        product->setPrice(price);
         product->setMetric(query.value("metric").toString());
         list->push_back(std::move(product));
     }
