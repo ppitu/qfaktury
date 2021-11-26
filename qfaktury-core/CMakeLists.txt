@@ -22,6 +22,9 @@ add_library(qfaktury-core SHARED
   TypeClass/Price.h TypeClass/Price.cpp
   TypeClass/PostCode.h TypeClass/PostCode.cpp
   Exception/PostCodeException.h Exception/PostCodeException.cpp
+  TypeClass/NIP.h TypeClass/NIP.cpp Exception/NIPException.h Exception/NIPException.cpp
+  TypeClass/Phone.h TypeClass/Phone.cpp Exception/PhoneException.h Exception/PhoneException.cpp
+  TypeClass/Email.h TypeClass/Email.cpp Exception/EmailException.h Exception/EmailException.cpp
 )
 
 target_link_libraries(qfaktury-core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
