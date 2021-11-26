@@ -22,6 +22,7 @@ class QAction;
 class Invoice;
 
 class ProductModel;
+class ProductTableView;
 
 // class for creating main window with menu, toolbar, calendar and table widget
 class MainWindow : public QMainWindow {
@@ -76,7 +77,7 @@ public slots:
   bool close();
   void openHideOrganizer();  // Organizer
   void noteDownTask(const QDate &); // Organizer
-  void goodsAdd();
+  //void goodsAdd();
   void goodsDel();
   void goodsEdit();
   void findInvoicePdf(); // Pdf
@@ -112,6 +113,7 @@ private:
   static MainWindow *m_instance;
 
   ProductModel* mProductModel;
+  ProductTableView* mProductTableView;
 
   void saveColumnWidth();
   void init();

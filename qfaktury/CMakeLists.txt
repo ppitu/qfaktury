@@ -41,6 +41,7 @@ set(PROJECT_SOURCES
     src/SimpleSmtp_SSL_QT5/smtp_attachements/emailwindow.ui src/SimpleSmtp_SSL_QT5/smtp_attachements/smtp.cpp
     src/SimpleSmtp_SSL_QT5/smtp_attachements/smtp.h
     src/Dialog/ProductDialog.cpp src/Dialog/ProductDialog.h src/Dialog/ProductDialog.ui
+    src/TableView/ProductTableView.h src/TableView/ProductTableView.cpp src/TableView/ProductTableView.ui
   )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

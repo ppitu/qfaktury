@@ -97,7 +97,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="invoiceTab">
        <attribute name="title">
@@ -572,16 +572,6 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="goodsTab">
-       <attribute name="title">
-        <string>Towary/Usługi</string>
-       </attribute>
-       <layout class="QGridLayout">
-        <item row="0" column="0">
-         <widget class="QTableView" name="tableT"/>
-        </item>
-       </layout>
-      </widget>
      </widget>
     </item>
     <item row="1" column="1">
@@ -666,6 +656,7 @@
     <property name="title">
      <string>&amp;Towary</string>
     </property>
+    <addaction name="separator"/>
     <addaction name="addGoodsAction"/>
     <addaction name="delGoodsAction"/>
     <addaction name="editGoodsAction"/>

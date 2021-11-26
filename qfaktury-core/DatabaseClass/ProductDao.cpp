@@ -49,7 +49,7 @@ void ProductDao::updateProduct(const Product &product) const
     QSqlQuery query(mDatabase);
     query.prepare("UPDATE product SET ident = (:ident), name = (:name), code = (:code), pkwiu = (:pkwiu), quality = (:quality),"
                   "description = (:description), net = (:net), gross = (:gross), vat = (:vat), metric = (:metric) WHERE id = (:id)");
-    query.bindValue(":indet", product.ident());
+    query.bindValue(":ident", product.ident());
     query.bindValue(":id", product.id());
     query.bindValue(":name", product.name());
     query.bindValue(":code", product.code());
@@ -67,7 +67,7 @@ void ProductDao::updateProduct(const Product &product) const
 void ProductDao::removeProduct(int id) const
 {
     QSqlQuery query(mDatabase);
-    query.prepare("DELETE FROM person WHERE id = (:id)");
+    query.prepare("DELETE FROM product WHERE id = (:id)");
     query.bindValue(":id", id);
     query.exec();
     DatabaseManager::debugQuery(query);

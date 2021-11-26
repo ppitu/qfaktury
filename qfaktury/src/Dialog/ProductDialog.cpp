@@ -8,9 +8,6 @@
 
 #include "TypeClass/Price.h"
 
-/** Constructor
- */
-
 ProductDialog::ProductDialog(Product& product, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ProductDialog),

@@ -45,6 +45,7 @@
 #include "Class/Product.h"
 #include "Model/ProductModel.h"
 #include "Dialog/ProductDialog.h"
+#include "TableView/ProductTableView.h"
 
 MainWindow *MainWindow::m_instance = nullptr;
 bool MainWindow::shouldHidden = false;
@@ -109,7 +110,7 @@ void MainWindow::init() {
   if (firstRun()) {
 
     // towary/uslugi - wymiary
-    ui->tableT->setColumnWidth(0, 50);
+    /*ui->tableT->setColumnWidth(0, 50);
     ui->tableT->setColumnWidth(1, 140);
     ui->tableT->setColumnWidth(3, 50);
     ui->tableT->setColumnWidth(4, 70);
@@ -118,7 +119,7 @@ void MainWindow::init() {
     ui->tableT->setColumnWidth(7, 65); // netto2
     ui->tableT->setColumnWidth(8, 65); // netto3
     ui->tableT->setColumnWidth(9, 65); // netto4
-    ui->tableT->setColumnWidth(10, 65);
+    ui->tableT->setColumnWidth(10, 65);*/
 
     saveAllSettAsDefault();
 
@@ -286,6 +287,12 @@ void MainWindow::init() {
       ui->actionLoadBackup->deleteLater();
   }
 
+  mProductModel = new ProductModel(this);
+  mProductTableView = new ProductTableView(this);
+  mProductTableView->setModel(mProductModel);
+
+  ui->tabWidget2->addTab(mProductTableView, "Towary");
+
   // connect slots
   connect(ui->actionBug, &QAction::triggered, [this]() {
     QDesktopServices::openUrl(
@@ -317,11 +324,10 @@ void MainWindow::init() {
   connect(ui->invoiceRRAction, SIGNAL(triggered()), this, SLOT(newInvRR()));
   connect(ui->invoiceProFormaAction, SIGNAL(triggered()), this,
           SLOT(newPForm()));
-  connect(ui->addGoodsAction, SIGNAL(triggered()), this, SLOT(goodsAdd()));
-  connect(ui->actionPrintBuyer, SIGNAL(triggered()), this,
-          SLOT(printBuyerList()));
-  connect(ui->editGoodsAction, SIGNAL(triggered()), this, SLOT(goodsEdit()));
-  connect(ui->delGoodsAction, SIGNAL(triggered()), this, SLOT(goodsDel()));
+  connect(ui->addGoodsAction, &QAction::triggered, mProductTableView, &ProductTableView::addProduct);
+  connect(ui->actionPrintBuyer, SIGNAL(triggered()), this, SLOT(printBuyerList()));
+  connect(ui->editGoodsAction, &QAction::triggered, mProductTableView, &ProductTableView::editProduct);
+  connect(ui->delGoodsAction, &QAction::triggered, mProductTableView, &ProductTableView::removeProduct);
   connect(ui->findInvoiceAction, SIGNAL(triggered()), this, SLOT(findInvoicePdf()));
   connect(ui->findJPKAction, SIGNAL(triggered()), this, SLOT(openJPKDirectory()));
   connect(ui->filtrEnd, SIGNAL(dateChanged(const QDate &)), this, SLOT(checkDateRange(const QDate &)));
@@ -373,8 +379,8 @@ void MainWindow::init() {
           SLOT(warehouseEdit()));
   //connect(ui->tableT, SIGNAL(cellDoubleClicked(int, int)), this,
   //        SLOT(goodsEdit()));
-  connect(ui->tableT, SIGNAL(customContextMenuRequested(QPoint)), this,
-          SLOT(showTableMenuT(QPoint)));
+  //connect(ui->tableT, SIGNAL(customContextMenuRequested(QPoint)), this,
+  //        SLOT(showTableMenuT(QPoint)));
   connect(ui->sendEmailAction, SIGNAL(triggered()), this,
           SLOT(sendEmailToBuyer()));
 
@@ -415,8 +421,7 @@ void MainWindow::init() {
       generatePdfFromList();
   }
 
-  mProductModel = new ProductModel(this);
-  ui->tableT->setModel(mProductModel);
+
 }
 
 #if QUAZIP_FOUND
@@ -611,7 +616,7 @@ void MainWindow::saveColumnWidth() {
   qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
 
   // width of the columns in the towary "goods" tab
-  sett().setValue("towCol0", ui->tableT->columnWidth(0));
+  /*sett().setValue("towCol0", ui->tableT->columnWidth(0));
   sett().setValue("towCol1", ui->tableT->columnWidth(1));
   sett().setValue("towCol2", ui->tableT->columnWidth(2));
   sett().setValue("towCol3", ui->tableT->columnWidth(3));
@@ -621,7 +626,7 @@ void MainWindow::saveColumnWidth() {
   sett().setValue("towCol7", ui->tableT->columnWidth(7));
   sett().setValue("towCol8", ui->tableT->columnWidth(8));
   sett().setValue("towCol9", ui->tableT->columnWidth(9));
-  sett().setValue("towCol10", ui->tableT->columnWidth(10));
+  sett().setValue("towCol10", ui->tableT->columnWidth(10));*/
 
   // width of the columns in the history tab
   sett().setValue("histCol0", ui->tableH->columnWidth(0));
@@ -979,14 +984,14 @@ void MainWindow::showTableMenuT(QPoint p) {
 
   qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
 
-  QMenu *menuTableT = new QMenu(ui->tableT);
-  menuTableT->addAction(ui->addGoodsAction);
-  menuTableT->addAction(ui->delGoodsAction);
-  menuTableT->addAction(ui->editGoodsAction);
-  menuTableT->exec(ui->tableT->mapToGlobal(p));
+  //QMenu *menuTableT = new QMenu(ui->tableT);
+  //menuTableT->addAction(ui->addGoodsAction);
+  //menuTableT->addAction(ui->delGoodsAction);
+  //menuTableT->addAction(ui->editGoodsAction);
+  //menuTableT->exec(ui->tableT->mapToGlobal(p));
 
-  menuTableT = 0;
-  delete menuTableT;
+  //menuTableT = 0;
+  //delete menuTableT;
 }
 
 /** Slot
@@ -2192,9 +2197,9 @@ void MainWindow::newDuplicate() {
 /** Slot used to add goods
  */
 
-void MainWindow::goodsAdd()
-{
-    Product product;
+//void MainWindow::goodsAdd()
+//{
+    /*Product product;
 
     auto* dialog = new ProductDialog(product);
 
@@ -2203,10 +2208,10 @@ void MainWindow::goodsAdd()
     if(dialogCode == QDialog::Accepted)
     {
         QModelIndex createdIndex = mProductModel->addProduct(product);
-        ui->tableT->setCurrentIndex(createdIndex);
+        ui->->setCurrentIndex(createdIndex);
     }
 
-    delete dialog;
+    delete dialog;*/
 
   /*qDebug() << "[" << __FILE__ << ": " << __LINE__ << "] " << __FUNCTION__;
 
@@ -2234,7 +2239,7 @@ void MainWindow::goodsAdd()
 
   goodsWindow = 0;
   delete goodsWindow;*/
-}
+//}
 
 /** Slot used to delete goods
  */

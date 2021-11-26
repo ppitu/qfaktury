@@ -103,6 +103,8 @@ bool ProductModel::removeRows(int row, int count, const QModelIndex &parent)
         mDb.mProductDao.removeProduct(product.id());
     }
 
+    mProducts->erase(mProducts->begin() + row, mProducts->begin() + row + count);
+
     endRemoveRows();
 
     return true;
