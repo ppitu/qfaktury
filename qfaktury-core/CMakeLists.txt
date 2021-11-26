@@ -19,12 +19,13 @@ add_library(qfaktury-core SHARED
   Class/Product.h Class/Product.cpp
   DatabaseClass/ProductDao.h DatabaseClass/ProductDao.cpp
   Model/ProductModel.h Model/ProductModel.cpp
-  TypeClass/Price.h TypeClass/Price.cpp
-  TypeClass/PostCode.h TypeClass/PostCode.cpp
+  TypeClass/PriceType.h TypeClass/PriceType.cpp
+  TypeClass/PostCodeType.h TypeClass/PostCodeType.cpp
   Exception/PostCodeException.h Exception/PostCodeException.cpp
-  TypeClass/NIP.h TypeClass/NIP.cpp Exception/NIPException.h Exception/NIPException.cpp
-  TypeClass/Phone.h TypeClass/Phone.cpp Exception/PhoneException.h Exception/PhoneException.cpp
-  TypeClass/Email.h TypeClass/Email.cpp Exception/EmailException.h Exception/EmailException.cpp
+  TypeClass/NIPType.h TypeClass/NIPType.cpp Exception/NIPException.h Exception/NIPException.cpp
+  TypeClass/PhoneType.h TypeClass/PhoneType.cpp Exception/PhoneException.h Exception/PhoneException.cpp
+  TypeClass/EmailType.h TypeClass/EmailType.cpp Exception/EmailException.h Exception/EmailException.cpp
+  Class/Contractor.h Class/Contractor.cpp
 )
 
 target_link_libraries(qfaktury-core PRIVATE Qt${QT_VERSION_MAJOR}::Core)

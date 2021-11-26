@@ -91,7 +91,7 @@ std::unique_ptr<std::vector<std::unique_ptr<Product> > > ProductDao::products() 
         product->setPkwiu(query.value("pkwiu").toString());
         product->setQuality(query.value("quality").toString());
         product->setDescription(query.value("description").toString());
-        Price price(query.value("net").toDouble(), query.value("vat").toInt());
+        PriceType price(query.value("net").toDouble(), query.value("vat").toInt());
         product->setPrice(price);
         product->setMetric(query.value("metric").toString());
         list->push_back(std::move(product));

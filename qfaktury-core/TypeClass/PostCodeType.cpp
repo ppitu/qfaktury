@@ -1,21 +1,26 @@
-#include "PostCode.h"
+#include "PostCodeType.h"
 
 #include "Exception/PostCodeException.h"
 
 #include <QRegularExpression>
 
-PostCode::PostCode(QString postCode) :
+PostCodeType::PostCodeType()
+{
+
+}
+
+PostCodeType::PostCodeType(QString postCode) :
     postCode_(postCode)
 {
     validate(postCode_);
 }
 
-const QString &PostCode::getPostCode() const
+const QString &PostCodeType::getPostCode() const
 {
     return postCode_;
 }
 
-void PostCode::validate(QString value)
+void PostCodeType::validate(QString value)
 {
     if(postCode_.size() != 6)
     {

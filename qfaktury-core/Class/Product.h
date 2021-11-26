@@ -6,13 +6,13 @@
 #include <QMetaType>
 #include <QString>
 
-#include "TypeClass/Price.h"
+#include "TypeClass/PriceType.h"
 
 class Product
 {
 public:
     Product();
-    Product(int id, int lastId, const QString &ident, const QString &name, const QString &code, const QString &pkwiu, const QString &description, const QString &quality, const QString &metric, const Price& price);
+    Product(int id, int lastId, const QString &ident, const QString &name, const QString &code, const QString &pkwiu, const QString &description, const QString &quality, const QString &metric, const PriceType& price);
 
     int id() const;
     void setId(int newId);
@@ -32,8 +32,8 @@ public:
     void setQuality(const QString &newQuality);
     const QString &metric() const;
     void setMetric(const QString &newMetric);
-    const Price &price() const;
-    void setPrice(const Price &newPrice);
+    const PriceType &price() const;
+    void setPrice(const PriceType &newPrice);
 
 private:
     int mId;
@@ -45,7 +45,7 @@ private:
     QString mDescription;
     QString mQuality;
     QString mMetric;
-    Price mPrice;
+    PriceType mPrice;
 };
 
 Q_DECLARE_METATYPE(Product);

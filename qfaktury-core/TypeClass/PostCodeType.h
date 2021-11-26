@@ -3,10 +3,11 @@
 
 #include <QString>
 
-class PostCode
+class PostCodeType
 {
 public:
-    PostCode(QString postCode);
+    PostCodeType();
+    PostCodeType(QString postCode);
 
     const QString& getPostCode() const;
 

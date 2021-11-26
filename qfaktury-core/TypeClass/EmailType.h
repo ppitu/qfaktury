@@ -3,11 +3,11 @@
 
 #include <QString>
 
-class Email
+class EmailType
 {
 public:
-    Email() = delete;
-    Email(const QString &email);
+    EmailType() = delete;
+    EmailType(const QString &email);
 
     const QString& getEmail() const;
 

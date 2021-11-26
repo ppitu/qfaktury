@@ -6,7 +6,7 @@
 #include "src/settings.h"
 #include "src/validations.h"
 
-#include "TypeClass/Price.h"
+#include "TypeClass/PriceType.h"
 
 ProductDialog::ProductDialog(Product& product, QWidget *parent) :
     QDialog(parent),
@@ -43,7 +43,7 @@ void ProductDialog::accept()
     mProduct.setCode(ui->elCode->text());
     mProduct.setDescription(ui->elDescription->text());
     mProduct.setPkwiu(ui->elPKWIU->text());
-    Price price(ui->dsNet->value(), ui->cbVat->currentText().toInt());
+    PriceType price(ui->dsNet->value(), ui->cbVat->currentText().toInt());
     mProduct.setPrice(price);
     mProduct.setMetric(ui->elMetric->text());
     mProduct.setQuality(ui->elQuality->text());

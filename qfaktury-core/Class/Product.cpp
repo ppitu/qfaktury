@@ -104,17 +104,17 @@ void Product::setMetric(const QString &newMetric)
     mMetric = newMetric;
 }
 
-const Price &Product::price() const
+const PriceType &Product::price() const
 {
     return mPrice;
 }
 
-void Product::setPrice(const Price &newPrice)
+void Product::setPrice(const PriceType &newPrice)
 {
     mPrice = newPrice;
 }
 
-Product::Product(int id, int lastId, const QString &ident, const QString &name, const QString &code, const QString &pkwiu, const QString &description, const QString &quality, const QString &metric, const Price& price) :
+Product::Product(int id, int lastId, const QString &ident, const QString &name, const QString &code, const QString &pkwiu, const QString &description, const QString &quality, const QString &metric, const PriceType& price) :
     mId(id),
     mLastId(lastId),
     mIdent(ident),

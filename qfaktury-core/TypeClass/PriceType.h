@@ -4,11 +4,11 @@
 // TODO
 // Dodac obsluge dwoch liczba po przecinku, na razie moze ich byc wiecej
 
-class Price
+class PriceType
 {
 public:
-    Price(double net, int vat);
-    Price();
+    PriceType(double net, int vat);
+    PriceType();
 
     double getNet() const;
     void setNet(const double newNet);
