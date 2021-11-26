@@ -20,6 +20,8 @@ add_library(qfaktury-core SHARED
   DatabaseClass/ProductDao.h DatabaseClass/ProductDao.cpp
   Model/ProductModel.h Model/ProductModel.cpp
   TypeClass/Price.h TypeClass/Price.cpp
+  TypeClass/PostCode.h TypeClass/PostCode.cpp
+  Exception/PostCodeException.h Exception/PostCodeException.cpp
 )
 
 target_link_libraries(qfaktury-core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
