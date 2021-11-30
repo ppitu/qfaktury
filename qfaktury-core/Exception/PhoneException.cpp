@@ -5,7 +5,7 @@ PhoneException::PhoneException()
     
 }
 
-const char *PhoneException::what() const throw()
+const char *PhoneException::what() const noexcept
 {
     return "Invalid phone number";
 }

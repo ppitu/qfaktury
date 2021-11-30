@@ -5,7 +5,7 @@ NIPException::NIPException()
 
 }
 
-const char *NIPException::what() const throw()
+const char *NIPException::what() const noexcept
 {
    return "Invalid NIP";
 }

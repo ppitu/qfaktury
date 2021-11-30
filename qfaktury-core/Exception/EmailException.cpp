@@ -5,7 +5,7 @@ EmailException::EmailException()
 
 }
 
-const char *EmailException::what() const throw()
+const char *EmailException::what() const noexcept
 {
        return "Invalid e-mail";
 }

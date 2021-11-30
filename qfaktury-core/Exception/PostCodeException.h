@@ -8,7 +8,7 @@ class PostCodeException : public std::exception
 public:
     PostCodeException();
 
-    const char* what() const throw();
+    const char* what() const noexcept;
 };
 
 #endif // POSTCODEEXCEPTION_H

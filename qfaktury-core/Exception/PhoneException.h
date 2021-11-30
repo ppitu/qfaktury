@@ -8,7 +8,7 @@ class PhoneException : public std::exception
 public:
     PhoneException();
 
-    const char* what() const throw();
+    const char* what() const noexcept;
 };
 
 #endif // PHONEEXCEPTION_H

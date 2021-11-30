@@ -8,7 +8,7 @@ class NIPException : public std::exception
 public:
     NIPException();
 
-    const char* what() const throw();
+    const char* what() const noexcept;
 };
 
 #endif // NIPEXCEPTION_H
