@@ -13,23 +13,21 @@ find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Sql REQUIRED)
 
+file(GLOB_RECURSE source_class Class/*.cpp Class/*.h)
+file(GLOB_RECURSE source_database Database/*.cpp Database/*.h)
+file(GLOB_RECURSE source_database_class DatabaseClass/*.cpp DatabaseClass/*.h)
+file(GLOB_RECURSE source_exception Exception/*.cpp Exception/*.h)
+file(GLOB_RECURSE source_model Model/*.cpp Model/*.h)
+file(GLOB_RECURSE source_type_class TypeClass/*.cpp TypeClass/*.h)
+
 add_library(qfaktury-core SHARED
   qfaktury-core_global.h
-  Database/DatabaseManager.h Database/DatabaseManager.cpp
-  Class/Product.h Class/Product.cpp
-  DatabaseClass/ProductDao.h DatabaseClass/ProductDao.cpp
-  Model/ProductModel.h Model/ProductModel.cpp
-  TypeClass/Price.h TypeClass/Price.cpp
-  TypeClass/PostCode.h TypeClass/PostCode.cpp
-  Exception/PostCodeException.h Exception/PostCodeException.cpp
-  TypeClass/NIP.h TypeClass/NIP.cpp Exception/NIPException.h Exception/NIPException.cpp
-  TypeClass/Phone.h TypeClass/Phone.cpp Exception/PhoneException.h Exception/PhoneException.cpp
-  TypeClass/Email.h TypeClass/Email.cpp Exception/EmailException.h Exception/EmailException.cpp
-  Class/Contractor.h Class/Contractor.cpp TypeClass/Address.h TypeClass/Address.cpp
-  TypeClass/Street.h TypeClass/Street.cpp TypeClass/HouseNumber.h TypeClass/HouseNumber.cpp
-  TypeClass/FlatNumber.h TypeClass/FlatNumber.cpp TypeClass/City.h TypeClass/City.cpp
-  TypeClass/Municipality.h TypeClass/Municipality.cpp TypeClass/County.h TypeClass/County.cpp
-  TypeClass/Province.h TypeClass/Province.cpp TypeClass/Country.h TypeClass/Country.cpp
+  ${source_class}
+  ${source_database}
+  ${source_database_class}
+  ${source_exception}
+  ${source_model}
+  ${source_type_class}
 )
 
 target_link_libraries(qfaktury-core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
