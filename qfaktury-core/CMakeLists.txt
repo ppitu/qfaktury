@@ -25,7 +25,11 @@ add_library(qfaktury-core SHARED
   TypeClass/NIP.h TypeClass/NIP.cpp Exception/NIPException.h Exception/NIPException.cpp
   TypeClass/Phone.h TypeClass/Phone.cpp Exception/PhoneException.h Exception/PhoneException.cpp
   TypeClass/Email.h TypeClass/Email.cpp Exception/EmailException.h Exception/EmailException.cpp
-  Class/Contractor.h Class/Contractor.cpp
+  Class/Contractor.h Class/Contractor.cpp TypeClass/Address.h TypeClass/Address.cpp
+  TypeClass/Street.h TypeClass/Street.cpp TypeClass/HouseNumber.h TypeClass/HouseNumber.cpp
+  TypeClass/FlatNumber.h TypeClass/FlatNumber.cpp TypeClass/City.h TypeClass/City.cpp
+  TypeClass/Municipality.h TypeClass/Municipality.cpp TypeClass/County.h TypeClass/County.cpp
+  TypeClass/Province.h TypeClass/Province.cpp TypeClass/Country.h TypeClass/Country.cpp
 )
 
 target_link_libraries(qfaktury-core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
