@@ -3,11 +3,11 @@
 
 #include <QString>
 
-class NIPType
+class NIP
 {
 public:
-    NIPType();
-    NIPType(const QString& nip);
+    NIP();
+    NIP(const QString& nip);
 
     const QString& getNIP() const;
 

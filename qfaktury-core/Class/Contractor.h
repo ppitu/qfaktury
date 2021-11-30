@@ -4,45 +4,45 @@
 #include <QString>
 #include <optional>
 
-#include "TypeClass/EmailType.h"
-#include "TypeClass/NIPType.h"
-#include "TypeClass/PhoneType.h"
-#include "TypeClass/PostCodeType.h"
+#include "TypeClass/Email.h"
+#include "TypeClass/NIP.h"
+#include "TypeClass/Phone.h"
+#include "TypeClass/PostCode.h"
 
 class Contractor
 {
 public:
     Contractor();
-    Contractor(const QString &name, const QString &city, const PostCodeType &postCode, const QString &address, const NIPType &nip, std::optional<QString> bankAccount, std::optional<PhoneType> phone, std::optional<EmailType> email, std::optional<QString> www);
+    Contractor(const QString &name, const QString &city, const PostCode &postCode, const QString &address, const NIP &nip, std::optional<QString> bankAccount, std::optional<Phone> phone, std::optional<Email> email, std::optional<QString> www);
 
     const QString &name() const;
     void setName(const QString &newName);
     const QString &city() const;
     void setCity(const QString &newCity);
-    const PostCodeType &postCode() const;
-    void setPostCode(const PostCodeType &newPostCode);
+    const PostCode &postCode() const;
+    void setPostCode(const PostCode &newPostCode);
     const QString &address() const;
     void setAddress(const QString &newAddress);
-    const NIPType &nip() const;
-    void setNip(const NIPType &newNip);
+    const NIP &nip() const;
+    void setNip(const NIP &newNip);
     std::optional<QString> bankAccount() const;
     void setBankAccount(std::optional<QString> newBankAccount);
-    std::optional<PhoneType> phone() const;
-    void setPhone(std::optional<PhoneType> newPhone);
-    std::optional<EmailType> email() const;
-    void setEmail(std::optional<EmailType> newEmail);
+    std::optional<Phone> phone() const;
+    void setPhone(std::optional<Phone> newPhone);
+    std::optional<Email> email() const;
+    void setEmail(std::optional<Email> newEmail);
     std::optional<QString> www() const;
     void setWww(std::optional<QString> newWww);
 
 private:
     QString name_;
     QString city_;
-    PostCodeType postCode_;
+    PostCode postCode_;
     QString address_;
-    NIPType nip_;
+    NIP nip_;
     std::optional<QString> bankAccount_;
-    std::optional<PhoneType> phone_;
-    std::optional<EmailType> email_;
+    std::optional<Phone> phone_;
+    std::optional<Email> email_;
     std::optional<QString> www_;
 
 };

@@ -1,26 +1,26 @@
-#include "NIPType.h"
+#include "NIP.h"
 
 #include "Exception/NIPException.h"
 
 #include <QRegularExpression>
 
-NIPType::NIPType()
+NIP::NIP()
 {
 
 }
 
-NIPType::NIPType(const QString &nip) :
+NIP::NIP(const QString &nip) :
     nip_(nip)
 {
 
 }
 
-const QString &NIPType::getNIP() const
+const QString &NIP::getNIP() const
 {
     return nip_;
 }
 
-void NIPType::validate()
+void NIP::validate()
 {
     if(nip_.size() != 11)
     {

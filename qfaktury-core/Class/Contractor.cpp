@@ -20,12 +20,12 @@ void Contractor::setCity(const QString &newCity)
     city_ = newCity;
 }
 
-const PostCodeType &Contractor::postCode() const
+const PostCode &Contractor::postCode() const
 {
     return postCode_;
 }
 
-void Contractor::setPostCode(const PostCodeType &newPostCode)
+void Contractor::setPostCode(const PostCode &newPostCode)
 {
     postCode_ = newPostCode;
 }
@@ -40,12 +40,12 @@ void Contractor::setAddress(const QString &newAddress)
     address_ = newAddress;
 }
 
-const NIPType &Contractor::nip() const
+const NIP &Contractor::nip() const
 {
     return nip_;
 }
 
-void Contractor::setNip(const NIPType &newNip)
+void Contractor::setNip(const NIP &newNip)
 {
     nip_ = newNip;
 }
@@ -60,22 +60,22 @@ void Contractor::setBankAccount(std::optional<QString> newBankAccount)
     bankAccount_ = newBankAccount;
 }
 
-std::optional<PhoneType> Contractor::phone() const
+std::optional<Phone> Contractor::phone() const
 {
     return phone_;
 }
 
-void Contractor::setPhone(std::optional<PhoneType> newPhone)
+void Contractor::setPhone(std::optional<Phone> newPhone)
 {
     phone_ = newPhone;
 }
 
-std::optional<EmailType> Contractor::email() const
+std::optional<Email> Contractor::email() const
 {
     return email_;
 }
 
-void Contractor::setEmail(std::optional<EmailType> newEmail)
+void Contractor::setEmail(std::optional<Email> newEmail)
 {
     email_ = newEmail;
 }
@@ -90,7 +90,7 @@ void Contractor::setWww(std::optional<QString> newWww)
     www_ = newWww;
 }
 
-Contractor::Contractor(const QString &name, const QString &city, const PostCodeType &postCode, const QString &address, const NIPType &nip, std::optional<QString> bankAccount, std::optional<PhoneType> phone, std::optional<EmailType> email, std::optional<QString> www) : name_(name),
+Contractor::Contractor(const QString &name, const QString &city, const PostCode &postCode, const QString &address, const NIP &nip, std::optional<QString> bankAccount, std::optional<Phone> phone, std::optional<Email> email, std::optional<QString> www) : name_(name),
     city_(city),
     postCode_(postCode),
     address_(address),

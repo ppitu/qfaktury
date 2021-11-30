@@ -3,11 +3,11 @@
 
 #include <QString>
 
-class PhoneType
+class Phone
 {
 public:
-    PhoneType() = delete;
-    PhoneType(const QString& phone);
+    Phone() = delete;
+    Phone(const QString& phone);
 
     const QString& getPhone() const;
 
