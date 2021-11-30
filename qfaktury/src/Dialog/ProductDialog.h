@@ -28,7 +28,6 @@ private slots:
 private:
     Ui::ProductDialog *ui;
     Product& mProduct;
-    Price price;
 };
 
 #endif //PRODUCTDIALOG_H

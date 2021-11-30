@@ -58,8 +58,7 @@ void ProductDialog::reject()
 
 void ProductDialog::calculateGross()
 {
-    price.changeNet(ui->dsNet->value());
-    price.chbageVat(ui->cbVat->currentText().toInt());
+    Price price(ui->dsNet->value(), ui->cbVat->currentText().toInt());
     ui->dsGross->setValue(price.getGross());
     qDebug() << "Dziala: " << price.getGross();
 }

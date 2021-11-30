@@ -11,14 +11,8 @@ public:
     Price();
 
     double getNet() const;
-    void setNet(const double newNet);
     double getGross() const;
-    void setGross(const double newGorss);
     int getVat() const;
-    void setVat(const int newVat);
-    void changeNet(double net);
-    void changeGross(double gross);
-    void chbageVat(int vat);
 
 private:
     double net_;

@@ -22,47 +22,14 @@ double Price::getNet() const
     return net_;
 }
 
-void Price::setNet(double newNet)
-{
-    net_ = newNet;
-}
-
 double Price::getGross() const
 {
     return gross_;
 }
 
-void Price::setGross(double newGorss)
-{
-    gross_ = newGorss;
-}
-
 int Price::getVat() const
 {
     return vat_;
-}
-
-void Price::setVat(int newVat)
-{
-    vat_ = newVat;
-}
-
-void Price::changeNet(double net)
-{
-    net_ = net;
-    calculate();
-}
-
-void Price::changeGross(double gross)
-{
-    gross_= gross;
-    calculate();
-}
-
-void Price::chbageVat(int vat)
-{
-    vat_ = vat;
-    calculate();
 }
 
 void Price::calculate()
