@@ -10,9 +10,14 @@ const HouseNumber &Address::getHouseNumber() const
     return houseNumber_;
 }
 
-const FlatNumber &Address::getFlatNumber() const
+const std::optional<FlatNumber> Address::getFlatNumber() const
 {
-    return flatNumber_;
+    if(flatNumber_.has_value())
+    {
+        return flatNumber_;
+    }
+
+    return {};
 }
 
 const City &Address::getCity() const
@@ -30,22 +35,40 @@ const PostCode &Address::getPostCode() const
     return postCode_;
 }
 
-const Country &Address::getCountry() const
+const std::optional<Country> Address::getCountry() const
 {
-    return country_;
+    if(country_.has_value())
+    {
+        return country_;
+    }
+
+    return {};
 }
 
-const County &Address::getCounty() const
+const std::optional<County> Address::getCounty() const
 {
-    return county_;
+    if(country_.has_value())
+    {
+        return county_;
+    }
+
+    return {};
 }
 
-const Province &Address::getProvice() const
+const std::optional<Province> Address::getProvice() const
 {
-    return provice_;
+    if(provice_.has_value())
+    {
+        return provice_;
+    }
+
+    return {};
 }
 
-Address::Address(const Street &street, const HouseNumber &houseNumber, const FlatNumber &flatNumber, const City &city, const Municipality &municipality, const PostCode &postCode, const Country &country, const County &county, const Province &provice) : street_(street),
+Address::Address(const Street &street, const HouseNumber &houseNumber, const std::optional<FlatNumber> flatNumber,
+                 const City &city, const Municipality &municipality, const PostCode &postCode,
+                 const std::optional<Country> country, const std::optional<County> county, const std::optional<Province> provice) :
+    street_(street),
     houseNumber_(houseNumber),
     flatNumber_(flatNumber),
     city_(city),
