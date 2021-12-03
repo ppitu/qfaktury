@@ -22,13 +22,13 @@ public:
 
     const Street& getStreet() const;
     const HouseNumber &getHouseNumber() const;
-    const std::optional<FlatNumber> getFlatNumber() const;
+    const std::optional<FlatNumber> &getFlatNumber() const;
     const City &getCity() const;
     const Municipality &getMunicipality() const;
     const PostCode &getPostCode() const;
-    const std::optional<Country> getCountry() const;
-    const std::optional<County> getCounty() const;
-    const std::optional<Province> getProvice() const;
+    const std::optional<Country> &getCountry() const;
+    const std::optional<County> &getCounty() const;
+    const std::optional<Province> &getProvice() const;
 
 private:
     Street street_;
