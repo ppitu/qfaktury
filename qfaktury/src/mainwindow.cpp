@@ -42,8 +42,8 @@
 #include <QStandardPaths>
 #include <iostream>
 
-#include "Class/Product.h"
-#include "Model/ProductModel.h"
+#include "Class/product.h"
+#include "Model/product_model.h"
 #include "Dialog/ProductDialog.h"
 #include "TableView/ProductTableView.h"
 

@@ -6,8 +6,8 @@
 #include <vector>
 #include <memory>
 
-#include "Class/Product.h"
-#include "Database/DatabaseManager.h"
+#include "Class/product.h"
+#include "Database/database_manager.h"
 
 #include "qfaktury-core_global.h"
 
@@ -59,8 +59,8 @@ private:
     bool isIndexValid(const QModelIndex& index) const;
 
 private:
-    DatabaseManager& mDb;
-    std::unique_ptr<std::vector<std::unique_ptr<Product>>> mProducts;
+    DatabaseManager& database_;
+    std::vector<Product> products_;
 };
 
 #endif // PRODUCTMODEL_H

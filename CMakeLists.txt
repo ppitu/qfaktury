@@ -4,3 +4,4 @@ project(qfaktury)
 
 add_subdirectory(qfaktury-core)
 add_subdirectory(qfaktury)
+add_subdirectory(qfaktury-test)

@@ -29,8 +29,8 @@ public slots:
 private:
     Ui::ProductTableView *ui;
 
-    ProductModel* mProductModel;
-    QItemSelectionModel* mProductSelectionModel;
+    ProductModel* productModel_;
+    QItemSelectionModel* productSelectionModel_;
 };
 
 #endif // PRODUCTTABLEVIEW_H

@@ -3,7 +3,7 @@
 
 #include <QDialog>
 
-#include "Class/Product.h"
+#include "Class/product.h"
 
 // TODO
 // Dodać walidacje to pól
@@ -27,7 +27,7 @@ private slots:
 
 private:
     Ui::ProductDialog *ui;
-    Product& mProduct;
+    Product& product_;
 };
 
 #endif //PRODUCTDIALOG_H

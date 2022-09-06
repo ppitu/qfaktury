@@ -1,14 +1,14 @@
 #include "ProductTableView.h"
 #include "ui_ProductTableView.h"
 
-#include "Model/ProductModel.h"
+#include "Model/product_model.h"
 #include "src/Dialog/ProductDialog.h"
 
 ProductTableView::ProductTableView(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ProductTableView),
-    mProductModel(nullptr),
-    mProductSelectionModel(nullptr)
+    productModel_(nullptr),
+    productSelectionModel_(nullptr)
 {
     ui->setupUi(this);
 }
@@ -20,8 +20,8 @@ ProductTableView::~ProductTableView()
 
 void ProductTableView::setModel(ProductModel *model)
 {
-    mProductModel = model;
-    ui->tableProduct->setModel(mProductModel);
+    productModel_ = model;
+    ui->tableProduct->setModel(productModel_);
 }
 
 void ProductTableView::setProductSeelctionModel(QItemSelectionModel *productSelectionModel)
@@ -39,7 +39,7 @@ void ProductTableView::addProduct()
 
     if(dialogCode == QDialog::Accepted)
     {
-        QModelIndex createdIndex = mProductModel->addProduct(product);
+        QModelIndex createdIndex = productModel_->addProduct(product);
         ui->tableProduct->setCurrentIndex(createdIndex);
     }
 
@@ -55,18 +55,20 @@ void ProductTableView::editProduct()
 
     QModelIndex currentProductIndex = ui->tableProduct->selectionModel()->selectedIndexes().first();
 
-    auto product = qvariant_cast<Product>(mProductModel->data(currentProductIndex, ProductModel::Roles::ID_ROLE));
+    auto product = qvariant_cast<Product>(productModel_->data(currentProductIndex, ProductModel::Roles::ID_ROLE));
 
-    auto *dialog = new ProductDialog(product, this);
+    auto dialog =  ProductDialog(product, this);
 
-    auto dialogCode = dialog->exec();
+    auto dialogCode = dialog.exec();
+
+    qDebug() << "Product update price gross" << product.getPrice().getGross();
+    qDebug() << "Product update price net" << product.getPrice().getNet();
 
     if(dialogCode == QDialog::Accepted)
     {
-        mProductModel->setData(currentProductIndex, QVariant::fromValue(product), ProductModel::Roles::ID_ROLE);
+        productModel_->setData(currentProductIndex, QVariant::fromValue(product), ProductModel::Roles::ID_ROLE);
     }
 
-    delete dialog;
 }
 
 void ProductTableView::removeProduct()
@@ -77,5 +79,5 @@ void ProductTableView::removeProduct()
     }
 
     int row = ui->tableProduct->selectionModel()->currentIndex().row();
-    mProductModel->removeRow(row);
+    productModel_->removeRow(row);
 }

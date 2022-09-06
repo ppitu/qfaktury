@@ -9,56 +9,51 @@
 #include "TypeClass/Price.h"
 
 ProductDialog::ProductDialog(Product& product, QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::ProductDialog),
-    mProduct(product)
+                                                                  QDialog(parent),
+                                                                  ui(new Ui::ProductDialog),
+                                                                  product_(product)
 {
-    ui->setupUi(this);
+  ui->setupUi(this);
 
-    connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &ProductDialog::accept);
-    connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &ProductDialog::reject);
-    connect(ui->dsNet, &QDoubleSpinBox::editingFinished, this, &ProductDialog::calculateGross);
-    connect(ui->cbVat, &QComboBox::currentIndexChanged, this, &ProductDialog::calculateGross);
+  connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &ProductDialog::accept);
+  connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &ProductDialog::reject);
+  connect(ui->dsNet, &QDoubleSpinBox::editingFinished, this, &ProductDialog::calculateGross);
+  connect(ui->cbVat, &QComboBox::currentIndexChanged, this, &ProductDialog::calculateGross);
 
-    ui->elIdent->setText(mProduct.ident());
-    ui->elName->setText(mProduct.name());
-    ui->elCode->setText(mProduct.code());
-    ui->elDescription->setText(mProduct.description());
-    ui->elMetric->setText(mProduct.metric());
-    ui->elQuality->setText(mProduct.quality());
-    ui->elPKWIU->setText(mProduct.pkwiu());
-    ui->dsNet->setValue(mProduct.price().getNet());
-    ui->dsGross->setValue(mProduct.price().getGross());
+  ui->elIdent->setText(product_.getIdent());
+  ui->elName->setText(product_.getName());
+  ui->elCode->setText(product_.getCode());
+  ui->elDescription->setText(product_.getDescription());
+  ui->elMetric->setText(product_.getMetric());
+  ui->elQuality->setText(product_.getQuality());
+  ui->elPKWIU->setText(product_.getPkwiu());
+  ui->dsNet->setValue(product_.getPrice().getNet());
+  ui->dsGross->setValue(product_.getPrice().getGross());
 }
 
 ProductDialog::~ProductDialog()
 {
-    delete ui;
+  delete ui;
 }
 
 void ProductDialog::accept()
 {
-    mProduct.setIdent(ui->elIdent->text());
-    mProduct.setName(ui->elName->text());
-    mProduct.setCode(ui->elCode->text());
-    mProduct.setDescription(ui->elDescription->text());
-    mProduct.setPkwiu(ui->elPKWIU->text());
-    Price price(ui->dsNet->value(), ui->cbVat->currentText().toInt());
-    mProduct.setPrice(price);
-    mProduct.setMetric(ui->elMetric->text());
-    mProduct.setQuality(ui->elQuality->text());
+  Product product(product_.getId(), product_.getLastId(), ui->elIdent->text(), ui->elName->text(), ui->elCode->text(), ui->elPKWIU->text(),
+                  ui->elDescription->text(), ui->elQuality->text(), ui->elMetric->text(), {ui->dsNet->value(), ui->cbVat->currentText().toInt()});
 
-    QDialog::accept();
+  product_ = product;
+
+  QDialog::accept();
 }
 
 void ProductDialog::reject()
 {
-    QDialog::reject();
+  QDialog::reject();
 }
 
 void ProductDialog::calculateGross()
 {
-    Price price(ui->dsNet->value(), ui->cbVat->currentText().toInt());
-    ui->dsGross->setValue(price.getGross());
-    qDebug() << "Dziala: " << price.getGross();
+  Price price(ui->dsNet->value(), ui->cbVat->currentText().toInt());
+  ui->dsGross->setValue(price.getGross());
+  qDebug() << "Dziala: " << price.getGross();
 }
